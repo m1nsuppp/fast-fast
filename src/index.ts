@@ -1,12 +1,8 @@
-import Fastify from 'fastify';
-
-const app = Fastify({
-  logger: true,
-});
-
-app.get('/', () => ({ message: 'Hello Fastify!' }));
+import { buildApp } from './app.js';
 
 const start = async (): Promise<void> => {
+  const app = await buildApp();
+
   try {
     await app.listen({ port: 3000 });
   } catch (err) {
