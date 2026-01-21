@@ -211,11 +211,9 @@ export default function routingExamples(fastify: FastifyInstance): void {
       done();
     },
     // 실제 핸들러
-    handler: (
-      request: FastifyRequest<{ Querystring: { name?: string } }>,
-      reply,
-    ) => {
-      void reply.send({ hello: request.query.name ?? 'World' });
+    handler: async (request, reply) => {
+      const query = request.query as { name?: string };
+      return reply.send({ hello: query.name ?? 'World' });
     },
   });
 

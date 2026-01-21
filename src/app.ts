@@ -22,6 +22,8 @@ import userRoutes from './routes/users.js';
 import authExampleRoutes from './routes/auth-example.js';
 import lifecycleTestRoutes from './routes/lifecycle-test.js';
 import routingExamples from './routes/routing-examples.js';
+import validationExamples from './routes/validation-examples.js';
+import serializationExamples from './routes/serialization-examples.js';
 
 export async function buildApp(): Promise<FastifyInstance> {
   const app = Fastify({
@@ -99,6 +101,15 @@ export async function buildApp(): Promise<FastifyInstance> {
 
   // 라우팅 예제
   await app.register(routingExamples, { prefix: '/routing' });
+
+  // ========================================
+  // Phase 2: 검증과 직렬화
+  // ========================================
+  // JSON Schema 검증 예제
+  await app.register(validationExamples, { prefix: '/validation' });
+
+  // 응답 직렬화 예제
+  await app.register(serializationExamples, { prefix: '/serialization' });
 
   return await Promise.resolve(app);
 }
